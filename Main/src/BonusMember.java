@@ -1,5 +1,3 @@
-import com.sun.deploy.security.SelectableSecurityManager;
-
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
@@ -20,23 +18,27 @@ public class BonusMember {
     /**
      *
      */
-    private BonusMember(int memberNo, Personals personals, LocalDate enrolledDate, int bonuspoints)
+    public BonusMember(int memberNo, Personals personals, int bonuspoints, int year, int month, int day )
     {
         if (memberNo == 0
         || personals == null
-        || enrolledDate == null
-        || bonuspoints < 0)
+        || bonuspoints < 0
+        || year == 0
+        || month == 0
+        || day == 0)
         {throw new IllegalArgumentException("One or more of the parameters are invalid."); }
             else
         {
+            this.enrolledDate = LocalDate.of(year,month,day);
             this.memberNo = memberNo;
             this.personals = personals;
-            this.enrolledDate = enrolledDate;
+            }
             this.bonuspoints = bonuspoints;
 
         }
 
-    }
+
+
     public LocalDate getEnrolledDate() {
         return enrolledDate;
     }
@@ -53,7 +55,7 @@ public class BonusMember {
         return bonuspoints;
     }
 
-    public int getQualificationPoints(LocalDate date){
+    public int findQualificationPoints(LocalDate date){
         if (ChronoUnit.DAYS.between( this.enrolledDate, date )< 365){
         if (bonuspoints < 25000){
             return (25000-bonuspoints);
