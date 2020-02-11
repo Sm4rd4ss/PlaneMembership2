@@ -55,29 +55,24 @@ public class BonusMember {
         return bonuspoints;
     }
 
-    public int findQualificationPoints(LocalDate date){
-        if (ChronoUnit.DAYS.between( this.enrolledDate, date )< 365){
-        if (bonuspoints < 25000){
-            return (25000-bonuspoints);
+    public int findQualificationPoints(LocalDate date) {
+           int points = 0;
+        if (ChronoUnit.DAYS.between(this.enrolledDate, date) < 365) {
+            points = bonuspoints;
+
+
+
+    }
+    return points;
+    }
+
+
+        public boolean okPassword(String password){
+            boolean strongPass = personals.okPassword(password);
+            return strongPass;
         }
-        else if (25000 < bonuspoints && bonuspoints < 75000)
-        {
-            return (75000 -bonuspoints);
-        }
-        else {
-            return 0;
-        }
-        }
-        else {
-            return 25000;
+        public int registerPoints(int newPoints){
+            bonuspoints = bonuspoints + newPoints;
+            return bonuspoints;
         }
     }
-    public boolean okPassword(String password){
-      boolean strongPass =  personals.okPassword(password);
-      return strongPass;
-    }
-    public int registerPoints(int newPoints){
-        bonuspoints = bonuspoints + newPoints;
-        return bonuspoints;
-    }
-}
