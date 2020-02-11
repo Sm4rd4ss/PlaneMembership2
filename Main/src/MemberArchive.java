@@ -21,7 +21,8 @@ public class MemberArchive implements Iterable<BonusMember> {
     int bonusPoints = 0;
     boolean added = false;
     int memberNo = findAvailableNo();
-    BonusMember sicMember = new BasicMember(memberNo, pers, bonusPoints);
+    BonusMember sicMember = new BasicMember(memberNo, pers, bonusPoints, LocalDate.now().getYear(),
+            LocalDate.now().getMonthValue(), LocalDate.now().getDayOfMonth());
     Members.put(memberNo, sicMember);
         if (Members.get(memberNo) != null){
             added = true;
@@ -44,12 +45,16 @@ public class MemberArchive implements Iterable<BonusMember> {
             BonusMember bonusMember = it.next();
             if(bonusMember.getBonuspoints() > 24999){
                 Members.remove(bonusMember.getMemberNo());
-                bonusMember = new SilverMember(bonusMember.getMemberNo(), bonusMember.getPersonals(), bonusMember.getBonuspoints());
+                bonusMember = new SilverMember(bonusMember.getMemberNo(), bonusMember.getPersonals(),
+                        bonusMember.getBonuspoints(),bonusMember.getEnrolledDate().getYear(),
+                        bonusMember.getEnrolledDate().getMonthValue(),bonusMember.getEnrolledDate().getDayOfMonth());
                 Members.put(bonusMember.getMemberNo(), bonusMember);
             }
             if (bonusMember.getBonuspoints() > 74999){
                 Members.remove(bonusMember.getMemberNo());
-                bonusMember = new GoldMember(bonusMember.getMemberNo(), bonusMember.getPersonals(), bonusMember.getBonuspoints());
+                bonusMember = new GoldMember(bonusMember.getMemberNo(), bonusMember.getPersonals(),
+                        bonusMember.getBonuspoints(),bonusMember.getEnrolledDate().getYear(),
+                        bonusMember.getEnrolledDate().getMonthValue(),bonusMember.getEnrolledDate().getDayOfMonth());
                 Members.put(bonusMember.getMemberNo(), bonusMember);
 
             }
@@ -91,4 +96,7 @@ public class MemberArchive implements Iterable<BonusMember> {
       return it;
     }
 }
+
+
+
 

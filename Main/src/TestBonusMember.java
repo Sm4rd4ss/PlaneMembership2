@@ -29,7 +29,7 @@ import static org.junit.jupiter.api.Assertions.*;
         void testBasicMemberOle() {
             BasicMember b1 = new BasicMember(100, ole, 0, 2006, 2, 15);
             b1.registerPoints(30000);
-            System.out.println("Test nr 1: No qualification points");
+            System.out.println("Test nr 1: should be checking to gold as hes passes the silver threshold");
             assertEquals(0, b1.findQualificationPoints(testDate));
             assertEquals(30000, b1.getBonuspoints());
             System.out.println("Test nr 2: Adding 15 000 points, still no qualification points");
