@@ -29,7 +29,7 @@ public class MemberArchive implements Iterable<BonusMember> {
         }
         return added;
     }
-    private int findAvailableNo(){
+    public int findAvailableNo(){
         Random random = new Random();
         random.nextInt(100000);
         int c = 0;
