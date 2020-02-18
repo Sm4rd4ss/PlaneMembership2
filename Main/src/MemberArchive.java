@@ -40,7 +40,7 @@ public class MemberArchive implements Iterable<BonusMember> {
             return c;
 
     }
-    private void checkMembers(){
+    public void checkMembers(){
         for (Iterator<BonusMember> it = Members.values().iterator(); it.hasNext(); ) {
             BonusMember bonusMember = it.next();
             if(bonusMember.getBonuspoints() > 24999){
@@ -62,13 +62,13 @@ public class MemberArchive implements Iterable<BonusMember> {
         }
 
     }
-    public BonusMember findMember(String memberNo){
+    public BonusMember findMember(int memberNo){
         BonusMember foundMember = null;
         foundMember = Members.get(memberNo);
         return foundMember;
 
     }
-    public boolean removeMember(String memberNo){
+    public boolean removeMember(int memberNo){
         boolean removed = false;
          Members.remove(memberNo);
          if(findMember(memberNo)== null)
@@ -77,11 +77,11 @@ public class MemberArchive implements Iterable<BonusMember> {
          }
          return removed;
     }
-    public int findPoints(String memberNo, String password){
+    public int findPoints(int memberNo, String password){
             BonusMember member = findMember(memberNo);
             Personals person= member.getPersonals();
             int points = 0;
-            if (person.okPassword(password) == true ){
+            if (person.okPassword(password)){
                 points = member.getBonuspoints();
             }
             else{ points = -1;}

@@ -29,7 +29,7 @@ public class MemberApp {
         System.out.println("2. List all BonusMembers");
         System.out.println("3. Upgrade Qualified Members");
         System.out.println("4. Register New Points");
-        //TODO: Add more menus
+
 
         System.out.println("9. Quit"); // Or another number than 9
         System.out.println("\nPlease select from the menu.\n");
@@ -77,11 +77,11 @@ public class MemberApp {
                     break;
 
                 case UPGRADE_MEMBER:
-                    borrowHearingAid();
+                    upgradeMembers();
                     break;
 
                 case REGISTER_POINTS:
-                    returnHearingAid();
+                    registerPoints();
                     break;
                 // ---- Add more cases here if needed ----
 
@@ -183,5 +183,39 @@ public class MemberApp {
         }
 
     }
+    private void upgradeMembers()
+    {
+        members.checkMembers();
+    }
+    private int registerPoints()
+    {
+        boolean validInput = true;
+        int memberNo = 0;
+        int newPoints = 0;
+        upgradeMembers();
+        Scanner scnr = new Scanner(System.in);
+        System.out.println("Please write your memberNumber");
+        if(scnr.hasNextInt())
+        {
+            memberNo = scnr.nextInt();
+            scnr.nextLine();
+        }
+        else{
+            validInput = false;
+            System.out.print("please write a membernumber");
+        }
+        System.out.println("Please write your memberNumber");
+        if(scnr.hasNextInt())
+        {
+            newPoints = scnr.nextInt();
+        }
+        else{
+            validInput = false;
+            System.out.print("please write a number");
 
+        }
+        members.findMember(memberNo).registerPoints(newPoints);
+        return members.findMember(memberNo).getBonuspoints();
+
+}
 }

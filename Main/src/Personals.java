@@ -20,7 +20,7 @@ class Personals {
      * @param emailAddress email address of the person
      * @param password the password of the person
      */
-    public Personals(String firstname, String surname, String emailAddress, String password) {
+    Personals(String firstname, String surname, String emailAddress, String password) {
         if (firstname == null
                 || surname == null
                 || emailAddress == null
@@ -41,7 +41,7 @@ class Personals {
      *
      * @return the persons first name.
      */
-    public String getFirstname() {
+    String getFirstname() {
         return firstname;
     }
     /**
@@ -49,7 +49,7 @@ class Personals {
      *
      * @return the persons surname.
      */
-    public String getSurname() {
+    String getSurname() {
         return surname;
     }
     /**
@@ -69,7 +69,7 @@ class Personals {
      * @return <code>true</code> if password is correct
      * <code>false</code> if password is wrong
      */
-    public boolean okPassword(String password) {
+    boolean okPassword(String password) {
         return this.password.equalsIgnoreCase(password);
     }
     /**
