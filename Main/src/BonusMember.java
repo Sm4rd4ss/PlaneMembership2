@@ -4,13 +4,13 @@ import java.time.temporal.ChronoUnit;
 /**
  *
  */
-public class BonusMember {
+public abstract class BonusMember implements Comparable<BonusMember>{
 
 
     private final int memberNo;
     private final Personals personals;
     private final LocalDate enrolledDate;
-    private int bonuspoints = 0;
+    protected int bonuspoints = 0;
    public final double FACTOR_SILVER = 1.2;
     public final double FACTOR_GOLD = 1.5;
 
@@ -71,8 +71,40 @@ public class BonusMember {
             boolean strongPass = personals.okPassword(password);
             return strongPass;
         }
-        public int registerPoints(int newPoints){
-            bonuspoints = bonuspoints + newPoints;
-            return bonuspoints;
+        public abstract int registerPoints(int newPoints);
+
+    @Override
+    public boolean equals(Object bonusMember)
+    {
+
+        if (this == bonusMember)
+        {
+            return true;
+        }
+        else {
+            return false;
         }
     }
+    @Override
+    public int hashCode()
+    {
+        int code = getMemberNo()*49999;
+        return code;
+    }
+    @Override
+    public int compareTo(BonusMember bonusMember) {
+        if(this.getBonuspoints() > bonusMember.getBonuspoints())
+        {
+            return 1;
+        }
+        if(this.getBonuspoints() < bonusMember.getBonuspoints())
+        {
+            return -1;
+        }
+        else
+        {
+            return 0;
+        }
+
+    }
+}

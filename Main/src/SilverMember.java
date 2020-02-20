@@ -10,6 +10,7 @@ public class SilverMember extends BonusMember {
     public int registerPoints(int newPoints) {
         double points = (newPoints*FACTOR_SILVER);
         int i = (int) Math.ceil(points);
-        return super.registerPoints(i);
+        this.bonuspoints = bonuspoints + i;
+        return bonuspoints;
     }
 }

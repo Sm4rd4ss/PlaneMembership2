@@ -1,14 +1,18 @@
-
-import java.time.Year;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Scanner;
-public class MemberApp {
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class MemberApp implements Comparable {
     private  MemberArchive members;
 
     private final int ADD_MEMBER = 1;
     private final int LIST_ALL_MEMBERS = 2;
     private final int UPGRADE_MEMBER = 3;
     private final int REGISTER_POINTS = 4;
+    private final int LIST_ALL_MEMBERS_BY_POINTS = 5;
     // ---- add more constants as needed ---
     private final int EXIT = 9;
 
@@ -82,6 +86,10 @@ public class MemberApp {
 
                 case REGISTER_POINTS:
                     registerPoints();
+                    break;
+
+                case LIST_ALL_MEMBERS_BY_POINTS:
+                        getArchive();
                     break;
                 // ---- Add more cases here if needed ----
 
@@ -187,7 +195,23 @@ public class MemberApp {
     {
         members.checkMembers();
     }
-    private int registerPoints()
+
+
+    public List<BonusMember> getArchive()
+    {
+        //ArrayList<BonusMember> memlist =  members.getMembers().stream().sorted();  //.collect(Collectors.toCollection(ArrayList::new));
+        Stream<BonusMember> bonusmemberStream = Stream.of();
+        ArrayList<BonusMember> memList = members.getArchive();
+        ArrayList<BonusMember> sortedList  = memList.stream()
+                .sorted(BonusMember::compareTo)
+                .collect(Collectors.toCollection(ArrayList::new));
+        for (BonusMember bonusMember : sortedList
+             ) { System.out.print(bonusMember.getPersonals().getFirstname() + bonusMember.getPersonals().getSurname() + bonusMember.getBonuspoints());
+
+        }
+            return sortedList;
+    }
+    private void registerPoints()
     {
         boolean validInput = true;
         int memberNo = 0;
@@ -215,7 +239,12 @@ public class MemberApp {
 
         }
         members.findMember(memberNo).registerPoints(newPoints);
-        return members.findMember(memberNo).getBonuspoints();
+        members.findMember(memberNo);
 
-}
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return 0;
+    }
 }

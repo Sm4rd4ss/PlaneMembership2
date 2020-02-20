@@ -11,6 +11,7 @@ public class BasicMember extends BonusMember
 
     @Override
     public int registerPoints(int newPoints) {
-        return super.registerPoints(newPoints);
+        this.bonuspoints = bonuspoints + newPoints;
+        return bonuspoints;
     }
 }
