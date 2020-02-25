@@ -58,6 +58,7 @@ public class MemberApp implements Comparable {
 
     }
 
+
     /**
      * Starts the application. This is the main loop of the application,
      * presenting the menu, retrieving the selected menu choice from the user,
